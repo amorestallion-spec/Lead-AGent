@@ -29,6 +29,30 @@ const SERVICES = [
     ],
   },
   {
+    title: "AI Voice Agents",
+    description:
+      "Deploy intelligent AI voice agents that handle customer calls 24/7. From appointment booking to FAQs, your business never misses an opportunity — even after hours.",
+    image: "/images/service-voice.jpg",
+    features: [
+      "24/7 automated call handling",
+      "Natural conversational AI voice",
+      "Appointment scheduling & booking",
+      "Smart routing & escalation",
+    ],
+  },
+  {
+    title: "Lead Generation as a Service",
+    description:
+      "AI-powered lead generation that identifies, researches, and qualifies potential clients at scale. Stop cold-calling — start converting warm, AI-qualified leads.",
+    image: "/images/service-leads.jpg",
+    features: [
+      "Automated prospect research",
+      "Smart lead scoring & ranking",
+      "Personalized outreach sequences",
+      "Real-time dashboard & analytics",
+    ],
+  },
+  {
     title: "Ongoing Maintenance",
     description:
       "Keep your site secure, fast, and up-to-date with our affordable maintenance plans. We handle updates, backups, and minor changes so you can focus on business.",
@@ -64,11 +88,11 @@ export default function Services() {
           </span>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white">
             AI-Powered{" "}
-            <span className="gradient-text">Web Solutions</span>
+            <span className="gradient-text">Business Solutions</span>
           </h2>
           <p className="mt-4 text-gray-400 text-lg">
-            From brand-new sites to complete overhauls, we deliver exceptional
-            results using the power of AI.
+            From websites and AI voice agents to automated lead generation — we
+            deliver end-to-end AI solutions that grow your business.
           </p>
         </div>
 
@@ -144,6 +168,10 @@ export default function Services() {
                         ? "$999"
                         : service.title === "Website Modernization"
                         ? "$599"
+                        : service.title === "AI Voice Agents"
+                        ? "$499 setup + $99/mo"
+                        : service.title === "Lead Generation as a Service"
+                        ? "$149/mo"
                         : "$99/mo"}
                     </span>
                   </div>

@@ -53,21 +53,21 @@ export default function Hero() {
           {/* Badge */}
           <div className="mb-6 inline-flex items-center gap-2 rounded-full glass-light px-4 py-1.5 text-sm text-gray-300">
             <span className="h-2 w-2 rounded-full bg-teal-400 animate-pulse" />
-            AI-Powered Web Solutions
+            End-to-End AI Business Solutions
           </div>
 
           {/* Main heading */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-            <span className="text-white">Modern Websites.</span>
+            <span className="text-white">AI Websites.</span>
             <br />
-            <span className="gradient-text">Powered by AI.</span>
+            <span className="gradient-text">Voice Agents. Smart Leads.</span>
           </h1>
 
           {/* Subheading */}
           <p className="mx-auto mt-6 max-w-2xl text-lg sm:text-xl text-gray-400 leading-relaxed">
-            We build stunning, high-performance websites for local businesses
-            using cutting-edge AI technology. Fast, affordable, and built to
-            grow your business.
+            We deliver end-to-end AI business solutions — from stunning
+            websites and 24/7 AI voice agents to automated lead generation
+            systems. Fast, affordable, and built to grow your business.
           </p>
 
           {/* CTA Buttons */}
@@ -105,8 +105,8 @@ export default function Hero() {
           <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
             {[
               { value: "48h", label: "Avg. Delivery" },
-              { value: "100%", label: "Client Satisfaction" },
-              { value: "AI-First", label: "Modern Approach" },
+              { value: "24/7", label: "AI Voice Agents" },
+              { value: "AI-First", label: "End-to-End Solutions" },
             ].map((stat, i) => (
               <div
                 key={stat.label}
