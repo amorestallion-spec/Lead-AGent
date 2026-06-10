@@ -26,7 +26,7 @@ export async function sendWithResend(payload: {
   const { name, email, phone, message } = payload;
 
   try {
-    const result = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: "Crank A,i solutions <onboarding@resend.dev>",
       to: ["kofiwritescopy@gmail.com"],
       subject: `New Contact: ${name} - Crank A,i solutions`,
@@ -67,7 +67,12 @@ export async function sendWithResend(payload: {
       `,
     });
 
-    console.log("✓ Resend API response:", JSON.stringify(result));
+    if (error) {
+      console.error("✕ Resend API error:", JSON.stringify(error));
+      return false;
+    }
+
+    console.log("✓ Resend email sent successfully:", data?.id);
     return true;
   } catch (error) {
     console.error("✕ Resend email send failed:", error);

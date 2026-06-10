@@ -52,16 +52,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Email service not configured — still record the submission
-    console.warn("⚠ RESEND_API_KEY not set. Contact form submission recorded but NOT emailed.");
-    console.warn("  To enable email delivery, set RESEND_API_KEY in environment variables.");
+    // Email service not configured or failed — still record the submission in logs
+    console.warn("⚠ Contact form submission recorded but email delivery FAILED or not configured.");
+    console.warn("  Check RESEND_API_KEY and Resend dashboard for errors.");
     console.warn("  Submission data:", JSON.stringify(submission, null, 2));
 
     return NextResponse.json(
       {
         success: true,
         message: "Thank you for reaching out! We've received your message.",
-        notice: "Email delivery is being configured. We'll respond as soon as possible.",
+        notice: "We're currently experiencing a delay in our email notifications, but your message has been logged. We'll respond as soon as possible.",
       },
       { status: 200 }
     );
