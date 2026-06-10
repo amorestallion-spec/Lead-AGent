@@ -36,17 +36,17 @@ export default function Navbar() {
             <div className="relative h-9 w-9 md:h-10 md:w-10 overflow-hidden rounded-lg">
               <Image
                 src="/images/logo.png"
-                alt="Crankson AI Solutions"
+                alt="Crank A,i solutions"
                 fill
                 className="object-cover"
               />
             </div>
             <div>
               <span className="text-lg md:text-xl font-bold text-white tracking-tight">
-                Crankson
+                Crank
               </span>
               <span className="hidden sm:inline text-lg md:text-xl font-light gradient-text ml-1">
-                AI
+                A,i
               </span>
             </div>
           </a>

@@ -23,9 +23,9 @@ export async function sendWithResend(payload: {
   const { name, email, phone, message } = payload;
 
   await resend.emails.send({
-    from: "Crankson AI Solutions <onboarding@resend.dev>",
+    from: "Crank A,i solutions <onboarding@resend.dev>",
     to: ["kofiwritescopy@gmail.com"],
-    subject: `New Contact: ${name} - Crankson AI Solutions`,
+    subject: `New Contact: ${name} - Crank A,i solutions`,
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #7c3aed, #14b8a6); padding: 24px; border-radius: 12px 12px 0 0;">
@@ -56,7 +56,7 @@ export async function sendWithResend(payload: {
           </div>
           <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 20px 0;" />
           <p style="color: #666; font-size: 12px; text-align: center;">
-            Sent via Crankson AI Solutions — AI-Powered Websites for Local Businesses
+            Sent via Crank A,i solutions — AI-Powered Websites for Local Businesses
           </p>
         </div>
       </div>
