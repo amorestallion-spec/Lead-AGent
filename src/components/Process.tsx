@@ -38,6 +38,46 @@ const STEPS = [
   },
 ];
 
+function ProcessStep({
+  step,
+  index,
+}: {
+  step: (typeof STEPS)[number];
+  index: number;
+}) {
+  const [ref, inView] = useInView();
+
+  return (
+    <div
+      ref={ref}
+      className={`relative flex flex-col items-center text-center transition-all duration-700 ${
+        inView
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-10"
+      }`}
+      style={{ transitionDelay: `${index * 200}ms` }}
+    >
+      {/* Number circle */}
+      <div className="relative mb-6">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full glass-light border border-white/5 group hover:border-purple-500/30 transition-all duration-300">
+          <div className="text-purple-400 group-hover:gradient-text transition-all duration-300">
+            {step.icon}
+          </div>
+        </div>
+        {/* Step number badge */}
+        <div className="absolute -top-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-teal-500 text-[10px] font-bold text-white">
+          {step.number}
+        </div>
+      </div>
+
+      <h3 className="text-xl font-bold text-white">{step.title}</h3>
+      <p className="mt-3 text-gray-400 text-sm leading-relaxed max-w-xs">
+        {step.description}
+      </p>
+    </div>
+  );
+}
+
 export default function Process() {
   const [ref, inView] = useInView();
 
@@ -76,39 +116,9 @@ export default function Process() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {STEPS.map((step, i) => {
-              const [stepRef, stepInView] = useInView();
-              return (
-                <div
-                  key={step.number}
-                  ref={stepRef}
-                  className={`relative flex flex-col items-center text-center transition-all duration-700 ${
-                    stepInView
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-10"
-                  }`}
-                  style={{ transitionDelay: `${i * 200}ms` }}
-                >
-                  {/* Number circle */}
-                  <div className="relative mb-6">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full glass-light border border-white/5 group hover:border-purple-500/30 transition-all duration-300">
-                      <div className="text-purple-400 group-hover:gradient-text transition-all duration-300">
-                        {step.icon}
-                      </div>
-                    </div>
-                    {/* Step number badge */}
-                    <div className="absolute -top-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-teal-500 text-[10px] font-bold text-white">
-                      {step.number}
-                    </div>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-white">{step.title}</h3>
-                  <p className="mt-3 text-gray-400 text-sm leading-relaxed max-w-xs">
-                    {step.description}
-                  </p>
-                </div>
-              );
-            })}
+            {STEPS.map((step, i) => (
+              <ProcessStep key={step.number} step={step} index={i} />
+            ))}
           </div>
         </div>
 
