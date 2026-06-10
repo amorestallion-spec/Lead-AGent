@@ -39,14 +39,29 @@ export async function POST(request: NextRequest) {
     console.log("To: kofiwritescopy@gmail.com");
     console.log("===================================");
 
-    // Try to send email via SMTP or save to queue
+    // Try to send email via Resend
     const sent = await sendContactEmail(submission);
+
+    if (sent) {
+      return NextResponse.json(
+        {
+          success: true,
+          message: "Thank you for reaching out! We'll get back to you within 4 hours.",
+        },
+        { status: 200 }
+      );
+    }
+
+    // Email service not configured — still record the submission
+    console.warn("⚠ RESEND_API_KEY not set. Contact form submission recorded but NOT emailed.");
+    console.warn("  To enable email delivery, set RESEND_API_KEY in environment variables.");
+    console.warn("  Submission data:", JSON.stringify(submission, null, 2));
 
     return NextResponse.json(
       {
         success: true,
-        message: "Thank you for reaching out! We'll get back to you within 4 hours.",
-        queued: !sent,
+        message: "Thank you for reaching out! We've received your message.",
+        notice: "Email delivery is being configured. We'll respond as soon as possible.",
       },
       { status: 200 }
     );

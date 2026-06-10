@@ -66,6 +66,94 @@ const SERVICES = [
   },
 ];
 
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: (typeof SERVICES)[number];
+  index: number;
+}) {
+  const [cardRef, cardInView] = useInView();
+
+  return (
+    <div
+      ref={cardRef}
+      className={`group rounded-2xl glass-light overflow-hidden transition-all duration-700 hover:glass hover:border-purple-500/20 ${
+        cardInView
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-10"
+      }`}
+      style={{ transitionDelay: `${index * 150}ms` }}
+    >
+      {/* Image */}
+      {service.image ? (
+        <div className="relative h-48 overflow-hidden">
+          <Image
+            src={service.image}
+            alt={service.title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-transparent to-transparent" />
+        </div>
+      ) : (
+        <div className="relative h-48 bg-gradient-to-br from-purple-900/30 to-teal-900/30 flex items-center justify-center">
+          <div className="text-6xl opacity-30">🛡️</div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-transparent to-transparent" />
+        </div>
+      )}
+
+      {/* Content */}
+      <div className="p-6 sm:p-8">
+        <h3 className="text-xl font-bold text-white group-hover:gradient-text transition-all duration-300">
+          {service.title}
+        </h3>
+        <p className="mt-3 text-gray-400 text-sm leading-relaxed">
+          {service.description}
+        </p>
+
+        {/* Features */}
+        <ul className="mt-6 space-y-2.5">
+          {service.features.map((feature) => (
+            <li key={feature} className="flex items-start gap-3 text-sm text-gray-400">
+              <svg
+                className="mt-0.5 h-4 w-4 shrink-0 text-teal-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              {feature}
+            </li>
+          ))}
+        </ul>
+
+        {/* Price indicator */}
+        <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+          <span className="text-xs text-gray-500">Starting at</span>
+          <span className="text-sm font-semibold gradient-text">
+            {service.title === "New Website Creation"
+              ? "$999"
+              : service.title === "Website Modernization"
+              ? "$599"
+              : service.title === "AI Voice Agents"
+              ? "$499 setup + $99/mo"
+              : service.title === "Lead Generation as a Service"
+              ? "$149/mo"
+              : "$99/mo"}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Services() {
   const [ref, inView] = useInView();
 
@@ -98,87 +186,9 @@ export default function Services() {
 
         {/* Service cards */}
         <div className="mt-16 grid gap-8 md:grid-cols-3">
-          {SERVICES.map((service, i) => {
-            const [cardRef, cardInView] = useInView();
-            return (
-              <div
-                key={service.title}
-                ref={cardRef}
-                className={`group rounded-2xl glass-light overflow-hidden transition-all duration-700 hover:glass hover:border-purple-500/20 ${
-                  cardInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
-                }`}
-                style={{ transitionDelay: `${i * 150}ms` }}
-              >
-                {/* Image */}
-                {service.image ? (
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-transparent to-transparent" />
-                  </div>
-                ) : (
-                  <div className="relative h-48 bg-gradient-to-br from-purple-900/30 to-teal-900/30 flex items-center justify-center">
-                    <div className="text-6xl opacity-30">🛡️</div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-transparent to-transparent" />
-                  </div>
-                )}
-
-                {/* Content */}
-                <div className="p-6 sm:p-8">
-                  <h3 className="text-xl font-bold text-white group-hover:gradient-text transition-all duration-300">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-gray-400 text-sm leading-relaxed">
-                    {service.description}
-                  </p>
-
-                  {/* Features */}
-                  <ul className="mt-6 space-y-2.5">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3 text-sm text-gray-400">
-                        <svg
-                          className="mt-0.5 h-4 w-4 shrink-0 text-teal-400"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Price indicator */}
-                  <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-                    <span className="text-xs text-gray-500">Starting at</span>
-                    <span className="text-sm font-semibold gradient-text">
-                      {service.title === "New Website Creation"
-                        ? "$999"
-                        : service.title === "Website Modernization"
-                        ? "$599"
-                        : service.title === "AI Voice Agents"
-                        ? "$499 setup + $99/mo"
-                        : service.title === "Lead Generation as a Service"
-                        ? "$149/mo"
-                        : "$99/mo"}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {SERVICES.map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i} />
+          ))}
         </div>
       </div>
     </section>
