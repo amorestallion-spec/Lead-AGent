@@ -10,8 +10,8 @@ export function getResendClient(): Resend | null {
   return new Resend(apiKey);
 }
 
-const FROM_ADDRESS = "Crank A.i solutions <contact@voiechios.resend.app>";
-const TO_ADDRESS = "kofiwritescopy@gmail.com";
+const FROM_ADDRESS = "Crank AI solutions <contact@voiechios.resend.app>";
+const TO_ADDRESS = "info.crankai@gmail.com";
 
 /**
  * Check if we're using Resend's sandbox sender (onboarding@resend.dev).
@@ -43,7 +43,7 @@ export async function sendWithResend(payload: {
     console.warn(
       "⚠ Resend SANDBOX MODE detected — using onboarding@resend.dev\n" +
       `  Emails to "${TO_ADDRESS}" will only deliver if verified in the Resend dashboard.\n` +
-      "  Add 'kofiwritescopy@gmail.com' as a verified recipient at https://resend.com/audiences\n" +
+      "  Add 'info.crankai@gmail.com' as a verified recipient at https://resend.com/audiences\n" +
       "  Or add a custom domain to remove sandbox restrictions."
     );
   }
@@ -53,7 +53,7 @@ export async function sendWithResend(payload: {
       from: FROM_ADDRESS,
       to: [TO_ADDRESS],
       replyTo: email,
-      subject: `New Contact: ${name} - Crank A.i solutions`,
+      subject: `New Contact: ${name} - Crank AI solutions`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: linear-gradient(135deg, #7c3aed, #14b8a6); padding: 24px; border-radius: 12px 12px 0 0;">
@@ -84,7 +84,7 @@ export async function sendWithResend(payload: {
             </div>
             <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 20px 0;" />
             <p style="color: #666; font-size: 12px; text-align: center;">
-              Sent via Crank A.i solutions — AI-Powered Websites for Local Businesses
+              Sent via Crank AI solutions — AI-Powered Websites for Local Businesses
             </p>
           </div>
         </div>

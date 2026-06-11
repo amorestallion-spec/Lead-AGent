@@ -53,21 +53,21 @@ export default function Hero() {
           {/* Badge */}
           <div className="mb-6 inline-flex items-center gap-2 rounded-full glass-light px-4 py-1.5 text-sm text-gray-300">
             <span className="h-2 w-2 rounded-full bg-teal-400 animate-pulse" />
-            End-to-End AI Business Solutions
+            Powering Business Growth Through AI
           </div>
 
           {/* Main heading */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-            <span className="text-white">AI Websites.</span>
+            <span className="text-white">More Calls. More Bookings. More Revenue.</span>
             <br />
-            <span className="gradient-text">Voice Agents. Smart Leads.</span>
+            <span className="gradient-text">On Autopilot.</span>
           </h1>
 
           {/* Subheading */}
           <p className="mx-auto mt-6 max-w-2xl text-lg sm:text-xl text-gray-400 leading-relaxed">
-            We deliver end-to-end AI business solutions — from stunning
-            websites and 24/7 AI voice agents to automated lead generation
-            systems. Fast, affordable, and built to grow your business.
+            Crank AI Solutions builds high-converting websites and deploys
+            AI-powered voice agents and lead generation systems that work
+            24/7 — so your business never misses a customer again.
           </p>
 
           {/* CTA Buttons */}
@@ -78,7 +78,7 @@ export default function Hero() {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-purple-600 to-teal-500 group-hover:from-purple-500 group-hover:to-teal-400 transition-all duration-300" />
               <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse-glow" />
-              <span className="relative">Get Your Free Consultation</span>
+              <span className="relative">Book Your Free Strategy Call</span>
             </a>
             <a
               href="#services"

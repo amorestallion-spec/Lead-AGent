@@ -4,6 +4,20 @@ import { useInView } from "@/lib/utils";
 
 const TEAM_MEMBERS = [
   {
+    name: "Michael Crankson",
+    role: "C.E.O",
+    initials: "MC",
+    gradient: "from-purple-600 to-purple-800",
+    description: "Founder and visionary behind Crank AI solutions.",
+  },
+  {
+    name: "Kofi Amoako Junior",
+    role: "Chairman",
+    initials: "KA",
+    gradient: "from-teal-600 to-teal-800",
+    description: "Strategic leader guiding the company's long-term vision.",
+  },
+  {
     name: "Alex Chen",
     role: "Lead Strategist",
     initials: "AC",
@@ -30,20 +44,6 @@ const TEAM_MEMBERS = [
     initials: "SK",
     gradient: "from-teal-500 to-purple-600",
     description: "Builds stunning, high-performance websites using AI.",
-  },
-  {
-    name: "Michael Crankson",
-    role: "C.E.O",
-    initials: "MC",
-    gradient: "from-purple-600 to-purple-800",
-    description: "Founder and visionary behind Crank A.i solutions.",
-  },
-  {
-    name: "Kofi Amoako Junior",
-    role: "Chairman",
-    initials: "KA",
-    gradient: "from-teal-600 to-teal-800",
-    description: "Strategic leader guiding the company's long-term vision.",
   },
 ];
 
@@ -122,7 +122,7 @@ export default function Team() {
             Our Team
           </span>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            Meet the <span className="gradient-text">Crank A.i</span> Crew
+            Meet the <span className="gradient-text">Crank AI</span> Crew
           </h2>
           <p className="mt-4 text-gray-400 text-lg">
             A dedicated team combining AI expertise with web development

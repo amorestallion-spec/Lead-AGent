@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     console.log("Email:", email);
     console.log("Phone:", phone || "Not provided");
     console.log("Message:", message);
-    console.log("To: kofiwritescopy@gmail.com");
+    console.log("To: info.crankai@gmail.com");
     console.log("===================================");
 
     // Try to send email via Resend

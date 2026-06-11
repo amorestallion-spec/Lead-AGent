@@ -263,7 +263,7 @@ export default function Contact() {
                   <div>
                     <p className="text-xs text-gray-500">Email us</p>
                     <p className="text-sm text-gray-300 font-medium">
-                      kofiwritescopy@gmail.com
+                      info.crankai@gmail.com
                     </p>
                   </div>
                 </div>
