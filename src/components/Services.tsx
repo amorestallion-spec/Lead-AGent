@@ -133,26 +133,10 @@ function ServiceCard({
             </li>
           ))}
         </ul>
-
-        {/* Price indicator */}
-        <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-          <span className="text-xs text-gray-500">Starting at</span>
-          <span className="text-sm font-semibold gradient-text">
-            {service.title === "New Website Creation"
-              ? "$999"
-              : service.title === "Website Modernization"
-              ? "$599"
-              : service.title === "AI Voice Agents"
-              ? "$499 setup + $99/mo"
-              : service.title === "Lead Generation as a Service"
-              ? "$149/mo"
-              : "$99/mo"}
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
+              </div>
+            </div>
+          );
+        }
 
 export default function Services() {
   const [ref, inView] = useInView();

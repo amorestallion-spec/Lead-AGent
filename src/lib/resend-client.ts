@@ -10,6 +10,19 @@ export function getResendClient(): Resend | null {
   return new Resend(apiKey);
 }
 
+const FROM_ADDRESS = "Crank A.i solutions <onboarding@resend.dev>";
+const TO_ADDRESS = "kofiwritescopy@gmail.com";
+
+/**
+ * Check if we're using Resend's sandbox sender (onboarding@resend.dev).
+ * In sandbox mode, emails are only delivered to the account owner's
+ * verified email — other recipients are silently accepted but NOT delivered.
+ * To fix: verify the recipient email in the Resend dashboard, or add a custom domain.
+ */
+function isSandboxMode(): boolean {
+  return FROM_ADDRESS.includes("onboarding@resend.dev");
+}
+
 /**
  * Send email via Resend (the primary email service for this project)
  * Falls back to logging if not configured
@@ -25,11 +38,22 @@ export async function sendWithResend(payload: {
 
   const { name, email, phone, message } = payload;
 
+  // Warn about sandbox mode restrictions
+  if (isSandboxMode()) {
+    console.warn(
+      "⚠ Resend SANDBOX MODE detected — using onboarding@resend.dev\n" +
+      `  Emails to "${TO_ADDRESS}" will only deliver if verified in the Resend dashboard.\n` +
+      "  Add 'kofiwritescopy@gmail.com' as a verified recipient at https://resend.com/audiences\n" +
+      "  Or add a custom domain to remove sandbox restrictions."
+    );
+  }
+
   try {
     const { data, error } = await resend.emails.send({
-      from: "Crank A,i solutions <onboarding@resend.dev>",
-      to: ["kofiwritescopy@gmail.com"],
-      subject: `New Contact: ${name} - Crank A,i solutions`,
+      from: FROM_ADDRESS,
+      to: [TO_ADDRESS],
+      replyTo: email,
+      subject: `New Contact: ${name} - Crank A.i solutions`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: linear-gradient(135deg, #7c3aed, #14b8a6); padding: 24px; border-radius: 12px 12px 0 0;">
@@ -60,7 +84,7 @@ export async function sendWithResend(payload: {
             </div>
             <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 20px 0;" />
             <p style="color: #666; font-size: 12px; text-align: center;">
-              Sent via Crank A,i solutions — AI-Powered Websites for Local Businesses
+              Sent via Crank A.i solutions — AI-Powered Websites for Local Businesses
             </p>
           </div>
         </div>
@@ -68,11 +92,19 @@ export async function sendWithResend(payload: {
     });
 
     if (error) {
-      console.error("✕ Resend API error:", JSON.stringify(error));
+      console.error("✕ Resend API returned error:", JSON.stringify(error));
       return false;
     }
 
-    console.log("✓ Resend email sent successfully:", data?.id);
+    if (isSandboxMode()) {
+      console.log(
+        `✓ Resend accepted email (id: ${data?.id}).\n` +
+        `  NOTE: In sandbox mode, "${TO_ADDRESS}" must be verified in Resend dashboard for delivery.\n` +
+        `  Sender's email "${email}" added as Reply-To for easy response.`
+      );
+    } else {
+      console.log(`✓ Resend email sent successfully (id: ${data?.id})`);
+    }
     return true;
   } catch (error) {
     console.error("✕ Resend email send failed:", error);
