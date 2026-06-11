@@ -10,7 +10,7 @@ export function getResendClient(): Resend | null {
   return new Resend(apiKey);
 }
 
-const FROM_ADDRESS = "Crank A.i solutions <onboarding@resend.dev>";
+const FROM_ADDRESS = "Crank A.i solutions <contact@voiechios.resend.app>";
 const TO_ADDRESS = "kofiwritescopy@gmail.com";
 
 /**
