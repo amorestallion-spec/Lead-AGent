@@ -54,7 +54,7 @@ export default function Team() {
             Our Team
           </span>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            Meet the <span className="gradient-text">Crank A,i</span> Crew
+            Meet the <span className="gradient-text">Crank A.i</span> Crew
           </h2>
           <p className="mt-4 text-gray-400 text-lg">
             A dedicated team combining AI expertise with web development

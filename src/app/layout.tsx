@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Crank A,i solutions | Modern AI-Powered Websites for Local Businesses",
+  title: "Crank A.i solutions | Modern AI-Powered Websites for Local Businesses",
   description:
     "We build stunning, high-performance websites for local businesses using cutting-edge AI technology. Fast, affordable, and built to grow your business.",
   keywords: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "Crank AI",
   ],
   openGraph: {
-    title: "Crank A,i solutions | AI-Powered Websites",
+    title: "Crank A.i solutions | AI-Powered Websites",
     description:
       "Modern websites for local businesses, powered by AI. Get your professional online presence in under 48 hours.",
     type: "website",

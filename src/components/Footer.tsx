@@ -13,7 +13,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3">
               <span className="text-lg font-bold text-white">Crank</span>
-              <span className="text-lg font-light gradient-text">A,i</span>
+              <span className="text-lg font-light gradient-text">A.i</span>
             </div>
             <p className="mt-4 text-gray-500 text-sm max-w-sm leading-relaxed">
               We build modern, AI-powered websites for local businesses. Fast,
@@ -91,7 +91,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-600">
-            &copy; {year} Crank A,i solutions. All rights reserved.
+            &copy; {year} Crank A.i solutions. All rights reserved.
           </p>
           <div className="flex gap-4 text-xs text-gray-600">
             <span>Privacy Policy</span>
