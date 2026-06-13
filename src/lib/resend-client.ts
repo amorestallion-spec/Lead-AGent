@@ -7,6 +7,7 @@ export function getResendClient(): Resend | null {
     console.warn("⚠ RESEND_API_KEY not found in environment variables");
     return null;
   }
+  console.log(`ℹ Resend client initialized (API key length: ${apiKey.length})`);
   return new Resend(apiKey);
 }
 
@@ -34,19 +35,21 @@ export async function sendWithResend(payload: {
   message: string;
 }): Promise<boolean> {
   const resend = getResendClient();
-  if (!resend) return false;
+  if (!resend) {
+    console.error("✕ Cannot send email: Resend client not initialized (RESEND_API_KEY missing)");
+    return false;
+  }
 
   const { name, email, phone, message } = payload;
 
-  // Warn about sandbox mode restrictions
-  if (isSandboxMode()) {
-    console.warn(
-      "⚠ Resend SANDBOX MODE detected — using onboarding@resend.dev\n" +
-      `  Emails to "${TO_ADDRESS}" will only deliver if verified in the Resend dashboard.\n` +
-      "  Add 'info.crankai@gmail.com' as a verified recipient at https://resend.com/audiences\n" +
-      "  Or add a custom domain to remove sandbox restrictions."
-    );
-  }
+  console.log("=== Resend Email Debug ===");
+  console.log("FROM:", FROM_ADDRESS);
+  console.log("TO:", TO_ADDRESS);
+  console.log("Reply-To:", email);
+  console.log("Subject:", `New Contact: ${name} - Crank AI solutions`);
+  console.log("Sandbox mode:", isSandboxMode() ? "YES (onboarding@resend.dev)" : "NO (custom domain)");
+  console.log("Payload sender email:", email);
+  console.log("Payload sender name:", name);
 
   try {
     const { data, error } = await resend.emails.send({
@@ -91,23 +94,40 @@ export async function sendWithResend(payload: {
       `,
     });
 
+    console.log("=== Resend API Response ===");
+    console.log("Data:", JSON.stringify(data, null, 2));
+    console.log("Error:", JSON.stringify(error, null, 2));
+
     if (error) {
-      console.error("✕ Resend API returned error:", JSON.stringify(error));
+      console.error("✕ Resend API returned an error:");
+      console.error("  Error name:", error.name);
+      console.error("  Error message:", error.message);
+      console.error("  Full error:", JSON.stringify(error));
       return false;
     }
 
-    if (isSandboxMode()) {
-      console.log(
-        `✓ Resend accepted email (id: ${data?.id}).\n` +
-        `  NOTE: In sandbox mode, "${TO_ADDRESS}" must be verified in Resend dashboard for delivery.\n` +
-        `  Sender's email "${email}" added as Reply-To for easy response.`
-      );
+    if (data?.id) {
+      console.log(`✓ Resend email accepted (id: ${data.id})`);
+      if (isSandboxMode()) {
+        console.warn(
+          `  NOTE: In sandbox mode, "${TO_ADDRESS}" must be verified in Resend dashboard for delivery.\n` +
+          `  Sender's email "${email}" added as Reply-To for easy response.`
+        );
+      } else {
+        console.log(`  Custom domain detected — email should be delivered to ${TO_ADDRESS}`);
+      }
     } else {
-      console.log(`✓ Resend email sent successfully (id: ${data?.id})`);
+      console.warn("⚠ Resend returned success but no email ID — delivery may not have occurred");
+      console.warn("  Full data:", JSON.stringify(data));
     }
     return true;
   } catch (error) {
-    console.error("✕ Resend email send failed:", error);
+    console.error("✕ Resend email send threw an exception:");
+    console.error("  Error:", error);
+    if (error instanceof Error) {
+      console.error("  Message:", error.message);
+      console.error("  Stack:", error.stack);
+    }
     return false;
   }
 }
